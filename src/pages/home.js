@@ -1,16 +1,20 @@
-import {useSession} from "next-auth/react";
-import {useRouter} from "next/router";
+import {redirectToLogin} from "@/utils/redirectToLogin";
+import {Fragment} from "react";
+import Header from "../../components/header";
 
 function Home() {
-    const {data: session} = useSession();
-    const router = useRouter()
-    if (!session) {
-        router.push('/');
-        return;
-    }
-    return (<div>
-        I am in home page
-    </div>);
+    return (
+        <Fragment>
+            <Header/>
+            <div>
+                I am in home page
+            </div>
+        </Fragment>
+    );
+}
+
+export async function getServerSideProps(context) {
+    return redirectToLogin(context);
 }
 
 export default Home;

@@ -1,6 +1,6 @@
 import {Fragment} from "react";
 import classes from './header.module.css';
-import {useSession, signIn, signOut} from "next-auth/react"
+import {useSession, signOut} from "next-auth/react"
 import Link from "next/link";
 
 function Header() {
@@ -16,12 +16,19 @@ function Header() {
                     )}
                     {session && (
                         <li>
-                            <Link href="/dashboard" >Dashboard</Link>
+                            <Link href="/dashboard">Dashboard</Link>
                         </li>
                     )}
                     {session && (
                         <li>
                             <Link href="/about_us">About Us</Link>
+                        </li>
+                    )}
+                    {session && (
+                        <li>
+                            <Link href="/about_us">
+                                <button onClick={() => signOut()}>Logout</button>
+                            </Link>
                         </li>
                     )}
                 </ul>

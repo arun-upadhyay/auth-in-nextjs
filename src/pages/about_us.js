@@ -1,21 +1,23 @@
-import {useSession} from "next-auth/react";
-import {useRouter} from 'next/router'
-import {redirect} from "next/navigation";
-
+import {redirectToLogin} from "@/utils/redirectToLogin";
+import {Fragment} from "react";
+import Header from "../../components/header";
 
 function About_us() {
-    const {data: session} = useSession();
-    const router = useRouter()
-    if (!session) {
-        router.push('/');
-        return;
-    }
     return (
-        <div>
-            {/* eslint-disable-next-line react/no-unescaped-entities */}
-            <h2>I'm in about us page</h2>
-        </div>
+        <Fragment>
+            <Header/>
+            <div>
+                {/* eslint-disable-next-line react/no-unescaped-entities */}
+                <h2>I'm in about us page</h2>
+            </div>
+        </Fragment>
+
     );
 }
+
+export async function getServerSideProps(context) {
+    return redirectToLogin(context);
+}
+
 
 export default About_us;

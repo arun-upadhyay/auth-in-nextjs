@@ -1,15 +1,19 @@
-import {useSession, signIn, signOut} from "next-auth/react"
-import {useRouter} from 'next/router';
+import {redirectToLogin} from "@/utils/redirectToLogin";
+import {getSession} from "next-auth/react";
+import {Fragment} from "react";
+import Header from "../../components/header";
 
 export default function DashboardPage() {
-    const {data: session} = useSession();
-    const router = useRouter();
-    if (!session) {
-        router.push("/");
-    }
     return (
-        <div>
-            <p>You are in dashboard</p>
-        </div>
+        <Fragment>
+            <Header/>
+            <div>
+                <p>You are in dashboard</p>
+            </div>
+        </Fragment>
     );
+}
+
+export async function getServerSideProps(context) {
+    return redirectToLogin(context);
 }
