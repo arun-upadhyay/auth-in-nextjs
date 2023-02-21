@@ -32,6 +32,9 @@ function Header() {
                         </li>
                     )}
                 </ul>
+                {session && (
+                  <span>Logged as {session.user.email} </span>
+                )}
             </section>
 
         </Fragment>
